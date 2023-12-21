@@ -57,7 +57,7 @@ if (isset($_POST['sub123']) && $_SERVER['REQUEST_METHOD'] == "POST") {
                         </div>
                     </div>
                     <div class="mb-3 form-floating">
-                        <input type="text" placeholder="Your Email" name="email" class="form-control <?= isset($errEmail) ? 'is-invalid' : null; ?> <?= isset($crrEmail) ? 'is-valid' : null ?>" value="<?= $email ?? null ?>">
+                        <input type="email" placeholder="Your Email" name="email" class="form-control <?= isset($errEmail) ? 'is-invalid' : null; ?> <?= isset($crrEmail) ? 'is-valid' : null ?>" value="<?= $email ?? null ?>">
                         <label for="" class="">Your Email</label>
                         <div class="invalid-feedback ">
                             <?= $errEmail ?? null ?>
