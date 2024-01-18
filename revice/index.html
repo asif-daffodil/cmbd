@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="password" placeholder="password" id="pass">
+        <br><br>
+        <input type="checkbox" id="sp"> Show password
+        <br><br>
+        <input type="submit">
+    </form>
+
+    <script>
+        const sp = document.getElementById('sp');
+        const pass = document.getElementById('pass');
+
+        sp.addEventListener('click', () => {
+            if (sp.checked) {
+                pass.setAttribute('type', 'text');
+            } else {
+                pass.setAttribute('type', 'password');
+            }
+        });
+    </script>
+</body>
+
+</html>
