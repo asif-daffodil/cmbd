@@ -1,0 +1,18 @@
+users
+    - name
+    - email
+    - password
+    - img
+
+products
+    - name
+    - regular_price
+    - discount_price
+    - brand
+    - img
+
+orders
+    - user_id
+    - product_id
+    - quantity
+    - total_price 
