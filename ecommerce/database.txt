@@ -3,6 +3,8 @@ users
     - email
     - password
     - img
+    - role
+    - city
 
 products
     - name

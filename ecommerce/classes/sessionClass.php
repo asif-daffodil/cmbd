@@ -6,7 +6,10 @@ class sessionClass
 {
     public function __construct()
     {
-        session_start();
+        // start session if it's not started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function setSession($name, $value)
