@@ -25,6 +25,14 @@ class sessionClass
         return null;
     }
 
+    public function getSingleData($name, $field)
+    {
+        if (isset($_SESSION[$name][$field])) {
+            return $_SESSION[$name][$field];
+        }
+        return null;
+    }
+
     public function unsetSession($name)
     {
         unset($_SESSION[$name]);

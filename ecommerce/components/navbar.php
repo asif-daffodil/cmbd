@@ -41,6 +41,9 @@ $nav = new navbar();
                             <li><a class="dropdown-item" href="./update-profile.php">Update profile</a></li>
                             <li><a class="dropdown-item" href="./change-profile-image.php">change profile image</a></li>
                             <li><a class="dropdown-item" href="./change-password.php">Change password</a></li>
+                            <?php if ($session->getSingleData('user', 'role') === 'admin') { ?>
+                                <li><a class="dropdown-item" href="./dashboard.php">Admin Panel</a></li>
+                            <?php } ?>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

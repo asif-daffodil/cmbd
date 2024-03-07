@@ -11,6 +11,7 @@ products
     - regular_price
     - discount_price
     - brand
+    - description
     - img
 
 orders

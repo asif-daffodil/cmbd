@@ -7,7 +7,7 @@ require_once 'header.php';
         require_once './components/sidebar.php';
         ?>
         <div class="col-md-10 ms-auto">
-            <h1 class="">Dashboard</h1>
+            <h1 class="">All Orders</h1>
         </div>
     </div>
 </div>
