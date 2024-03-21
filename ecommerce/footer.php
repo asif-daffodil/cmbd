@@ -123,6 +123,88 @@
 </div>
 <!-- End of .container -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function() {
+        // update cart length
+        $('#cartCount').text(Cookies.get('cart') ? Cookies.get('cart').split(',').length : 0);
+
+        $('.addCartBtn').click(function() {
+            var id = $(this).data('id');
+            toastr.success(id + " Product added to cart!");
+            // get cookie if exicts
+            var cart = Cookies.get('cart');
+            if (cart) {
+                cart = cart.split(',');
+                cart.push(id);
+                Cookies.set('cart', cart, {
+                    expires: 1
+                });
+                $('#cartCount').text(cart.length);
+            } else {
+                Cookies.set('cart', id, {
+                    expires: 1
+                });
+                $('#cartCount').text(1);
+            }
+
+        });
+    });
+
+    // ajax for cart info
+    $(document).ready(function() {
+        // get product ids from cookies
+        const checkCart = () => {
+            var cart = Cookies.get('cart');
+            if (cart) {
+                $.ajax({
+                    url: './classes/cart-info.php',
+                    type: 'GET',
+                    data: {
+                        cart: cart
+                    },
+                    success: function(data) {
+                        // $('#cartInfo').html(data);
+                        data = JSON.parse(data);
+                        var products = data.products;
+                        var total = data.total;
+                        var html = '';
+                        products.forEach(product => {
+                            html += `
+                            <tr>
+                                <td>${product.name}</td>
+                                <td><img src="./Assets/images/${product.img}" alt="${product.name}" style="width: 50px;"></td>
+                                <td>${product.discount_price}</td>
+                                <td>${product.count}</td>
+                                <td>${product.discount_price * product.count}</td>
+                                <td>
+                                    <button class="btn btn-danger removeProduct" data-id="${product.id}" >Remove</button>
+                                </td>
+                            </tr>
+                            `;
+                        });
+                        $('#productsInCart').html(html);
+                        $('#total').text(total);
+                        $('#cartCount').text(Cookies.get('cart') ? Cookies.get('cart').split(',').length : 0);
+                    }
+                }).then(() => {
+                    $(".removeProduct").click(function() {
+                        var id = $(this).data('id');
+                        cart = Cookies.get('cart').split(',');
+                        cart = Array.from(cart);
+                        cart = cart.filter(item => item != id);
+                        Cookies.set('cart', cart, {
+                            expires: 1
+                        });
+                        toastr.success("Product removed successfully!");
+                        checkCart();
+                        $('#cartCount').text(Cookies.get('cart') ? Cookies.get('cart').split(',').length : 0);
+                    });
+                });
+            }
+        }
+        checkCart();
+    });
+</script>
 
 </body>
 

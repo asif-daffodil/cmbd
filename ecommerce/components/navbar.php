@@ -23,6 +23,14 @@ $nav = new navbar();
                 <li class="nav-item">
                     <a class="nav-link <?= $nav->checkPage('contact.php') ?>" href="./contact.php">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= $nav->checkPage('cart.php') ?>" href="./cart.php">
+                        <!-- fontawesome 6 shopping cart icon -->
+                        <i class="fas fa-shopping-cart"></i>
+                        Cart
+                        <span class="badge bg-primary" id="cartCount"><?= $session->getSession('cart') ? count($session->getSession('cart')) : 0 ?></span>
+                    </a>
+                </li>
                 <?php if (!$session->getSession('user')) {  ?>
                     <li>
                         <a class="nav-link <?= $nav->checkPage('login.php') ?>" href="./login.php">Log In</a>
@@ -44,6 +52,8 @@ $nav = new navbar();
                             <?php if ($session->getSingleData('user', 'role') === 'admin') { ?>
                                 <li><a class="dropdown-item" href="./dashboard.php">Admin Panel</a></li>
                             <?php } ?>
+                            <!-- all orders -->
+                            <li><a class="dropdown-item" href="./users-orders.php">Orders</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -52,8 +62,8 @@ $nav = new navbar();
                     </li>
                 <?php } ?>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" action="./search.php">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-success" type="submit">
                     <!-- fontawesome search icon -->
                     <i class="fas fa-search"></i>
